@@ -3,6 +3,13 @@
 session_start();
 ob_start();
 require 'ayarlar.php';
+
+    if(isset($_SESSION['zaman']) && time()>$_SESSION['zaman']){
+        session_destroy();
+        header('Location:/php-tutorial/10-Session-Islemleri/oturum_sonlandi.php');
+    }else{
+        $_SESSION['zaman'] = time() + 20;
+    }
 ?>
 <!doctype html>
 <html lang="en">

@@ -10,6 +10,8 @@
         }elseif ($sifre !=$uye['sifre']){
             $hata = "Şifreniz hatalı.";
         }else{
+
+            $_SESSION['zaman'] = time()+30;
             $_SESSION['kullanici_adi'] = $uye['kullanici_adi'];
 
             //header()
