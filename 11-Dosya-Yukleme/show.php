@@ -32,7 +32,7 @@
                         $yukle = move_uploaded_file($dosya['tmp_name'], 'uploads/' . $ad . '.' . $uzanti);
 
                         if ($yukle){
-                            $sonuc['dosya'] = 'upload/' . $ad . '.' . $uzanti;
+                            $sonuc['dosya'] = 'uploads/' . $ad . '.' . $uzanti;
                         } else {
                             $sonuc['hata'] = 'Bir sorun oluştu ve dosyanız yüklenemedi.';
                         }
