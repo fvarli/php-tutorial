@@ -2,7 +2,6 @@
 
 //DELETE FROM table_name WHERE column_name = value
 
-require 'header.php';
 
 if(!isset($_GET['id']) || empty($_GET['id'])){
     header('Location:index.php');

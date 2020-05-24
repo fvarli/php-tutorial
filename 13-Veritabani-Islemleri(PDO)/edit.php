@@ -1,5 +1,4 @@
 <?php
-require 'header.php';
 // UPDATE table_name SET column_name = value WHERE column_name = value
 /*
 $query = $db->prepare('UPDATE pdo_process SET
@@ -34,19 +33,24 @@ if(!$pdo_process){
     exit;
 }
 
+$categories = $db->query('SELECT * FROM categories ORDER  BY name ASC')->fetchAll(PDO::FETCH_ASSOC);
+
 //form send
 if(isset($_POST['submit'])){
     $title = isset($_POST['title']) ? $_POST['title'] : $pdo_process['title'];
     $content = isset($_POST['content']) ? $_POST['content'] : $pdo_process['content'];
     $status= isset($_POST['status']) ? $_POST['status'] : 0;
+    $category_id= isset($_POST['category_id']) ? $_POST['category_id'] : null;
 
     if(!$title){
         echo "Add Title";
     }elseif(!$content){
         echo "Add Content";
+    }elseif(!$category_id){
+        echo "Select Category";
     }else{
-        $query = $db->prepare('UPDATE pdo_process SET title = ?, content = ?, status = ? WHERE id = ?');
-        $update  = $query->execute([$title, $content, $status, $pdo_process['id']]);
+        $query = $db->prepare('UPDATE pdo_process SET title = ?, content = ?, status = ?, category_id = ? WHERE id = ?');
+        $update  = $query->execute([$title, $content, $status, $category_id, $pdo_process['id']]);
 
         if($update){
             header('Location:index.php?page=read&id='.$pdo_process['id']);
@@ -64,6 +68,13 @@ if(isset($_POST['submit'])){
     <input type="text" value="<?php echo isset($_POST['title']) ? $_POST['title'] : $pdo_process['title']; ?>" name="title"><br><br>
     Content: <br>
     <textarea name="content" value=""  id="" cols="30" rows="10"><?php echo isset($_POST['content']) ? $_POST['content'] : $pdo_process['content'];?></textarea><br><br>
+    Category: <br>
+    <select name="category_id">
+        <option value="">Select Category</option>
+        <?php foreach ($categories as $ct):?>
+            <option <?php echo $ct['id'] == $pdo_process['category_id'] ? 'selected' : '';?> value="<?php echo $ct['id'];?>"><?php echo $ct['name'];?></option>
+        <?php endforeach;?>
+    </select><br><br>
     Status
     <select name="status" id="">
         <option <?php echo $pdo_process['status'] == 0 ? 'selected': ''?> value="0">No</option>

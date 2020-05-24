@@ -1,6 +1,7 @@
 <?php
 
 require_once 'connect.php';
+require_once 'header.php';
 
 if(!isset($_GET['page'])){
     $_GET['page'] = 'index';
@@ -26,5 +27,13 @@ switch ($_GET['page']){
 
     case 'delete':
         require_once 'delete.php';
+        break;
+
+    case 'categories':
+        require_once 'categories.php';
+        break;
+
+    case 'add_category':
+        require_once 'add_category.php';
         break;
 }

@@ -108,8 +108,8 @@ PHPMyAdmin
     MIN, MAX, SUM, COUNT
         SELECT MIN(column_name) as new_value, MAX(column_name) as new_value, SUM(column_name) as new_value, COUNT(column_name) as new_value FROM table_name
 
-        
 
 
 
-	
+
+
