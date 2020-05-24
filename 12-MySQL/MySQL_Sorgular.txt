@@ -1,0 +1,115 @@
+PHPMyAdmin
+
+	database oluşturma:
+		CREATE DATABASE db_isim;
+		
+	database silme:
+		DROP DATABASE db_isim;
+
+	database listeleme:
+		SHOW DATABASES;
+		
+	tablo oluşturma:
+		CREATE TABLE table_name (table_name INT);
+	
+	tablo yeniden adlandırma:
+		RENAME TABLE old_name to new_name;
+		
+	tablo silme:
+		DROP TABLE table_name;
+		
+	sutün oluşturma:
+		ALTER TABLE table_name ADD COLUMN column_name data_type ->> (INT - VARCHAR(255) etc.)
+		
+	çoklu sutün oluşturma:
+		ALTER TABLE table_name ADD COLUMN (column_name data_type, column_name data_type);
+		
+	sutün sonrasına yeni bir sutün oluşturma:
+		ALTER TABLE table_name ADD column_name data_type AFTER column_name
+		
+	sutün silme:
+		ALTER TABLE table_name DROP column_name;
+	
+	sutün yeniden adlandırma:
+		ALTER TABLE table_name CHANGE old_name new_name data_type;
+		
+	primary key ve auto increment:
+		CREATE TABLE records (
+		id int AUTO_INCREMENT,
+		ad varchar(255),
+		soyad varchar(255),
+		PRIMARY KEY (id)
+		);
+
+    tablo listeleme:
+        SHOW TABLES;
+        SHOW TABLES IN database_name;
+
+	sutün listeleme:
+	    DESCRIBE table_name;
+	    EXPLAIN table_name;
+	    SHOW FIELDS FROM table_name;
+	    SHOW COLUMNS FROM table_name;
+
+
+	CRUD işlemleri:
+	    INSERT:
+	        INSERT INTO table_name (column1, column2, column3) VALUES ('test1', 'test2', test3), ('test4', 'test5', test6), ('test7', 'test8', test9)
+
+        SELECT:
+            SELECT column_name as new_column_name FROM table_name
+
+        UPDATE:
+            UPDATE table_name SET column_name ="new_value" WHERE column_name = what_you_want
+
+        DELETE:
+            DELETE FROM table_name WHERE column_name = what_you_want
+
+    WHERE:
+        != eşit değil
+        < küçük
+        > büyük
+        <= küçük veya eşit
+        >= büyük veya eşit
+        && ve
+        || veya
+
+    ORDER BY
+        SELECT * FROM table_name  ORDER BY colum_name ASC - DESC
+
+    LIMIT
+        SELECT column_name(s) FROM table_name WHERE condition LIMIT number
+
+    GROUP BY
+        SELECT column_name, COUNT(id) as new_value FROM table_name GROUP BY column_name
+
+    LIKE
+        SELECT * FROM table_name WHERE column_name LIKE '%search_value%'
+
+    IN
+        SELECT * FROM table_name WHERE column_name IN (search_value)
+
+    FIND_IN_SET
+        SELECT * FROM table_name WHERE FIND_IN_SET(search_value, column_name)
+
+    BETWEEN
+        SELECT * FROM table_name WHERE column_name BETWEEN value AND value
+
+    JOIN
+        INNER JOIN
+            SELECT * FROM konular INNER JOIN uyeler ON uyeler.uye_id = konular.uye_id
+
+        LEFT JOIN
+            SELECT * FROM konular LEFT JOIN uyeler ON uyeler.uye_id = konular.uye_id
+
+        RIGHT JOIN
+            SELECT * FROM konular RIGHT JOIN uyeler ON uyeler.uye_id = konular.uye_id
+
+    MIN, MAX, SUM, COUNT
+        SELECT MIN(column_name) as new_value, MAX(column_name) as new_value, SUM(column_name) as new_value, COUNT(column_name) as new_value FROM table_name
+
+        
+
+
+
+	
