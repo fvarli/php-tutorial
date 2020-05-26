@@ -33,6 +33,8 @@ if(!$pdo_process){
     exit;
 }
 
+$pdo_categories = explode(',', $pdo_process['category_id']);
+
 $categories = $db->query('SELECT * FROM categories ORDER  BY name ASC')->fetchAll(PDO::FETCH_ASSOC);
 
 //form send
@@ -40,7 +42,7 @@ if(isset($_POST['submit'])){
     $title = isset($_POST['title']) ? $_POST['title'] : $pdo_process['title'];
     $content = isset($_POST['content']) ? $_POST['content'] : $pdo_process['content'];
     $status= isset($_POST['status']) ? $_POST['status'] : 0;
-    $category_id= isset($_POST['category_id']) ? $_POST['category_id'] : null;
+    $category_id= isset($_POST['category_id']) && is_array($_POST['category_id']) ? implode(',', $_POST['category_id']) : null;
 
     if(!$title){
         echo "Add Title";
@@ -51,7 +53,7 @@ if(isset($_POST['submit'])){
     }else{
         $query = $db->prepare('UPDATE pdo_process SET title = ?, content = ?, status = ?, category_id = ? WHERE id = ?');
         $update  = $query->execute([$title, $content, $status, $category_id, $pdo_process['id']]);
-
+//TODO update doesn't work - video 96
         if($update){
             header('Location:index.php?page=read&id='.$pdo_process['id']);
         }else{
@@ -69,10 +71,9 @@ if(isset($_POST['submit'])){
     Content: <br>
     <textarea name="content" value=""  id="" cols="30" rows="10"><?php echo isset($_POST['content']) ? $_POST['content'] : $pdo_process['content'];?></textarea><br><br>
     Category: <br>
-    <select name="category_id">
-        <option value="">Select Category</option>
+    <select name="category_id" multiple size="5">
         <?php foreach ($categories as $ct):?>
-            <option <?php echo $ct['id'] == $pdo_process['category_id'] ? 'selected' : '';?> value="<?php echo $ct['id'];?>"><?php echo $ct['name'];?></option>
+            <option <?php echo in_array($ct['id'], $pdo_categories) ? 'selected' : '';?> value="<?php echo $ct['id'];?>"><?php echo $ct['name'];?></option>
         <?php endforeach;?>
     </select><br><br>
     Status

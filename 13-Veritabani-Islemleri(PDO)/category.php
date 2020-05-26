@@ -15,8 +15,8 @@ if(!$category){
     header('Location:index.php?page=categories');
     exit;
 }
-
-$query = $db->prepare('SELECT * FROM pdo_process WHERE category_id = ? ORDER BY id DESC ');
+// pdo_process which is belong to category
+$query = $db->prepare('SELECT * FROM pdo_process WHERE FIND_IN_SET(?, category_id) ORDER BY id DESC ');
 $query->execute([$category['id']]);
 
 $pdo_process = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -41,7 +41,7 @@ if(!empty($pdo_process)){
                     <div>
                         <a href="index.php?page=read&id=<?php echo $pdo['id']?>">[Read]</a>
                         <a href="index.php?page=edit&id=<?php echo $pdo['id']?>">[Edit]</a>
-                        <a href="index.php?page=delete&id=<?php echo $pdo['id']?>">[Delete]</a>
+                        <a href="index.php?page=delete&id=<?php echo $pdo['id']//TODO add confirmation?>">[Delete]</a>
                     </div>
                 </li>
             <?php else:?>

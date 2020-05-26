@@ -3,7 +3,7 @@
 
 <?php
 
-$categories = $db->query('SELECT categories.*, COUNT(pdo_process.id) as total_data FROM categories LEFT JOIN pdo_process ON pdo_process.category_id = categories.id GROUP BY categories.id')->fetchAll(PDO::FETCH_ASSOC);
+$categories = $db->query('SELECT categories.*, COUNT(pdo_process.id) as total_data FROM categories LEFT JOIN pdo_process ON FIND_IN_SET(categories.id, pdo_process.category_id) GROUP BY categories.id')->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 

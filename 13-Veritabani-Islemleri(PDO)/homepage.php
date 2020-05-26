@@ -36,7 +36,7 @@ print_r($pdo_process);
 
 $where = [];
 
-$sql = 'SELECT pdo_process.id, pdo_process.title, pdo_process.status, categories.name as category_name FROM pdo_process INNER JOIN categories ON categories.id = pdo_process.category_id';
+$sql = 'SELECT pdo_process.id, pdo_process.title, pdo_process.status, GROUP_CONCAT(categories.name) as category_name, GROUP_CONCAT(categories.id) as category_id FROM pdo_process INNER JOIN categories ON FIND_IN_SET(categories.id, pdo_process.category_id)';
 
 if(isset($_GET['search']) && !empty($_GET['search'])){
     $where[]= '(pdo_process.title LIKE "%' . $_GET['search'] .'%" || pdo_process.content LIKE "%' . $_GET['search'] .'%" || categories.name LIKE "%' . $_GET['search'] .'%")';
@@ -50,7 +50,7 @@ if(count($where)>0){
     $sql .= ' WHERE '. implode('&& ', $where);
 }
 
-$sql .= ' ORDER BY pdo_process.title';
+$sql .= ' GROUP BY pdo_process.id ORDER BY pdo_process.title';
 
 //print_r($where);
 
@@ -68,12 +68,19 @@ $pdo_process = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         <?php foreach ($pdo_process as $pdo):?>
             <?php if($pdo['status'] ==1 ):?>
                 <li>
-                    <?php echo $pdo['title']?> -
-                    (<?php echo $pdo['category_name']?>)
+                    <?php echo $pdo['title']?>
+
+                    <?php // TODO get category key and value - video 97
+                    $category_names = explode(' , ', $pdo['category_name']);
+                    $category_ids = explode(', ', $pdo['category_id']);
+                    foreach ($category_names as $key => $val){
+                        echo '<a href="index.php?page=category&id' . $category_ids[$key] .'">' . $val . '</a> ';
+                    }
+                    ?>
                     <div>
                         <a href="index.php?page=read&id=<?php echo $pdo['id']?>">[Read]</a>
                         <a href="index.php?page=edit&id=<?php echo $pdo['id']?>">[Edit]</a>
-                        <a href="index.php?page=delete&id=<?php echo $pdo['id']?>">[Delete]</a>
+                        <a href="index.php?page=delete&id=<?php echo $pdo['id'] //TODO add confirmation?>">[Delete]</a>
                     </div>
                 </li>
             <?php else:?>
