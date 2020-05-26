@@ -1,5 +1,22 @@
 <h3>PDO Process List</h3>
 
+<form action="" method="get">
+    <input type="text" class="date" name="start" placeholder="Start Date" value="<?php echo isset($_GET['start']) ? $_GET['start'] : ''; ?>"><br><br>
+    <input type="text" class="date" name="last" placeholder="Last Date" value="<?php echo isset($_GET['last']) ? $_GET['last'] : ''; ?>"><br><br>
+    <input type="text" name="search" placeholder="Search form the list" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>"><br><br>
+    <button type="submit">Search</button>
+</form>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $('.date').datepicker({
+        dateFormat: 'yy-mm-dd'
+    });
+</script>
+
 <?php
 // select * from table_name
 // INNER JOIN table_name ON table_name.id = table_name.id
@@ -17,8 +34,31 @@ print_r($pdo_process);
 
 // list with query
 
-$pdo_process = $db
-    ->query('SELECT pdo_process.id, pdo_process.title, pdo_process.status, categories.name as category_name FROM pdo_process INNER JOIN categories ON categories.id = pdo_process.category_id ORDER BY pdo_process.title')->fetchAll(PDO::FETCH_ASSOC);
+$where = [];
+
+$sql = 'SELECT pdo_process.id, pdo_process.title, pdo_process.status, categories.name as category_name FROM pdo_process INNER JOIN categories ON categories.id = pdo_process.category_id';
+
+if(isset($_GET['search']) && !empty($_GET['search'])){
+    $where[]= '(pdo_process.title LIKE "%' . $_GET['search'] .'%" || pdo_process.content LIKE "%' . $_GET['search'] .'%" || categories.name LIKE "%' . $_GET['search'] .'%")';
+}
+
+if(isset($_GET['start']) && !empty($_GET['start']) && isset($_GET['last']) && !empty($_GET['last'])){
+    $where[]= 'pdo_process.date BETWEEN "' . $_GET['start'] .' 00:00:00" AND "' . $_GET['last'] .' 23:59:59"';
+}
+
+if(count($where)>0){
+    $sql .= ' WHERE '. implode('&& ', $where);
+}
+
+$sql .= ' ORDER BY pdo_process.title';
+
+//print_r($where);
+
+echo $sql; //die();
+echo '<br>';
+echo '<br>';
+$pdo_process = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
 //print_r($pdo_process);
 
 ?>
@@ -43,7 +83,11 @@ $pdo_process = $db
     </ul>
 <?php else:?>
     <div>
-        There is no record.
+        <?php if (isset($_GET['search'])): ?>
+            No search record.
+        <?php else:?>
+            There is no record.
+        <?php endif; ?>
     </div>
 <?php endif; ?>
 

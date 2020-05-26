@@ -26,6 +26,6 @@ if(!$pdo_process){
     <strong>Created At: </strong><?php echo $date_format?><br><br>
     <?php echo $pdo_process['content']?><br><br>
     <?php if($pdo_process['status'] == 1){echo "Yes";}else{echo "No";}?><br><br>
-    <?php echo $pdo_process['category_id'];?>
+    <?php echo $pdo_process['category_id']; //TODO add left join to display category name?>
 </div>
 
