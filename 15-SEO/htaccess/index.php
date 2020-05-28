@@ -1,6 +1,6 @@
-<a href="/">Homepage</a> |
-<a href="index.php">About Us</a> |
-<a href="index.php">Contact</a> |
+<a href="/php-tutorial/15-SEO/htaccess">Homepage</a> |
+<a href="/php-tutorial/15-SEO/htaccess/about_us">About Us</a> |
+<a href="/php-tutorial/15-SEO/htaccess/contact">Contact</a> |
 
 <div style="background: yellow;">
 <?php
