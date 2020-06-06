@@ -3,3 +3,5 @@
     <input type="file" name="dosya[]" multiple> <br><br>
     <button type="submit">Yükle</button>
 </form>
+
+<?php

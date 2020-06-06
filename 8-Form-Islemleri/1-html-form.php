@@ -65,3 +65,6 @@ Gezdiği Ülkeler: <br>
 <button type="submit">Gönder</button>
 
 </form>
+
+<?php
+
