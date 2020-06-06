@@ -1,0 +1,8 @@
+8 | Undefined variable: test | C:\xampp\htdocs\php-tutorial\20-Hata-Yonetimi\custom_error_handler.php | 20
+8 | Undefined variable: test | C:\xampp\htdocs\php-tutorial\20-Hata-Yonetimi\custom_error_handler.php | 20
+8 | Undefined variable: test | C:\xampp\htdocs\php-tutorial\20-Hata-Yonetimi\custom_error_handler.php | 20
+2 | substr() expects at least 2 parameters, 0 given | C:\xampp\htdocs\php-tutorial\20-Hata-Yonetimi\custom_error_handler.php | 20
+2 | substr() expects at least 2 parameters, 0 given | C:\xampp\htdocs\php-tutorial\20-Hata-Yonetimi\custom_error_handler.php | 24
+2 | substr() expects at least 2 parameters, 0 given | C:\xampp\htdocs\php-tutorial\20-Hata-Yonetimi\custom_error_handler.php | 24
+2 | substr() expects at least 2 parameters, 0 given | C:\xampp\htdocs\php-tutorial\20-Hata-Yonetimi\custom_error_handler.php | 24
+8 | Undefined variable: test | C:\xampp\htdocs\php-tutorial\20-Hata-Yonetimi\custom_error_handler.php | 25
