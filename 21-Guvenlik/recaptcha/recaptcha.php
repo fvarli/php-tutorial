@@ -1,7 +1,7 @@
 <script>
     var onloadCallback = function () {
         grecaptcha.render('security',{
-            'sitekey': '6LfYMwEVAAAAAJEeEXKzDQE-eeEJI4Jisj2MIEdy'
+            'sitekey': 'your_site_key'
         })
     };
 </script>
