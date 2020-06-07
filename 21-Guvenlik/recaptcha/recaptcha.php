@@ -1,7 +1,7 @@
 <script>
     var onloadCallback = function () {
         grecaptcha.render('security',{
-            'sitekey': '6LfYMwEVAAAAAJEeEXKzDQE-eeEJI4Jisj2MIEdy'
+            'sitekey': 'your_site_key'
         })
     };
 </script>
@@ -13,4 +13,4 @@
     <button type="submit">Send</button>
 </form>
 
-<!--<div class="g-recaptcha" data-sitekey="6LfYMwEVAAAAAJEeEXKzDQE-eeEJI4Jisj2MIEdy"></div>-->
+<!--<div class="g-recaptcha" data-sitekey="your_site_key"></div>-->
