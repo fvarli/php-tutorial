@@ -12,7 +12,7 @@ if(!$name){
     curl_setopt_array($ch, [
         CURLOPT_URL => 'https://www.google.com/recaptcha/api/siteverify',
         CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => 'secret=your_secret_key=' . $recaptcha,
+        CURLOPT_POSTFIELDS => 'secret=6LfYMwEVAAAAAGEhQ28OXH7tQgE7nKGKJQoq-oEN&response=' . $recaptcha,
         CURLOPT_RETURNTRANSFER => true
     ]);
     $output = curl_exec($ch);
