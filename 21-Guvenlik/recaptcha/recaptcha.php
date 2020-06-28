@@ -14,3 +14,5 @@
 </form>
 
 <!--<div class="g-recaptcha" data-sitekey="your_site_key"></div>-->
+<?php
+?>
